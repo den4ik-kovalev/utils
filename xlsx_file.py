@@ -9,8 +9,8 @@ class XLSXFile:
 
     def __init__(self, path: Union[str, Path]):
         path = Path(path)
-        if path.suffix != ".xlsx":
-            raise Exception("The file extension must be .xlsx")
+        if not path.suffix.startswith(".xls"):
+            raise Exception("The file extension must be .xls")
         self._path = path
 
     @property
@@ -20,10 +20,10 @@ class XLSXFile:
     def exists(self) -> bool:
         return self._path.exists()
 
-    def read(self) -> list[OrderedDict]:
+    def read(self, sheet_idx: int = 0) -> list[OrderedDict]:
 
         wb = openpyxl.load_workbook(str(self._path))
-        ws = wb.active
+        ws = wb.worksheets[sheet_idx]
         if ws.max_row == 0:
             return []
 
@@ -40,10 +40,10 @@ class XLSXFile:
 
         return data
 
-    def write(self, data: list[OrderedDict]) -> None:
+    def write(self, data: list[OrderedDict], sheet_idx: int = 0) -> None:
 
         wb = openpyxl.Workbook()
-        ws = wb.active
+        ws = wb.worksheets[sheet_idx]
         if not data:
             wb.save(str(self._path))
             return
