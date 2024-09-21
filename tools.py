@@ -3,6 +3,10 @@ from enum import EnumMeta
 from fractions import Fraction
 
 
+# https://stackoverflow.com/questions/24483182/python-split-list-into-n-chunks
+# https://stackoverflow.com/questions/3329361/python-something-like-map-that-works-on-threads
+
+
 class Tools:
 
     @staticmethod
