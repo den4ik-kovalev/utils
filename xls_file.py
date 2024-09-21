@@ -5,7 +5,7 @@ from typing import Union
 import openpyxl
 
 
-class XLSXFile:
+class XLSFile:
 
     def __init__(self, path: Union[str, Path]):
         path = Path(path)
